@@ -16,11 +16,12 @@ def safeInput(promptText):
 
 def fileProcessor(filename):
     processedText = ""
-    punctuation = [".","?",",",":",";"]
+    punctuation = [".","?",",",":",";"] # what counts as punctuation
     return processedText
 
 def wordsPerSentence(inputText):
     wordCount = 0
+    wordMinimum = 4 # the minimum number of letters a word has to contain to count
     return wordCount
 
 # Main Process
