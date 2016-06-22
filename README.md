@@ -1,2 +1,3 @@
 # WordCount
-Repository for files and documentation related to WordCount.
+Repository for files and documentation related to WordCount. This is an edit.
+I like edits.
