@@ -19,6 +19,9 @@ def fileProcessor(filename):
     rawFile = open(filename)
     rawString = rawFile.read()
     punctuation = [".","?",",",":",";"] # what counts as punctuation
+    splitString = str.split(rawString)
+    
+    
     return processedText
 
 def wordsPerSentence(inputText):
