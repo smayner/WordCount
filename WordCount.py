@@ -1,5 +1,5 @@
 # Beginning of file for my sake, imports go up here.
-
+import string
 
 # Function Definitions
 def safeInput(promptText):
@@ -16,6 +16,8 @@ def safeInput(promptText):
 
 def fileProcessor(filename):
     processedText = ""
+    rawFile = open(filename)
+    rawString = rawFile.read()
     punctuation = [".","?",",",":",";"] # what counts as punctuation
     return processedText
 
