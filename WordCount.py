@@ -12,15 +12,25 @@ def safeInput(promptText):
             inputFile = open(inputText)
             return inputText
         except FileNotFoundError:
-            print("File not found or command entered incorrectly. Please try again.")
+            print("File not found or command entered incorrectly.")
+            print("Please ensure the text document(s) are in the same folder as the WordCount program.")
 
 def fileProcessor(filename):
-    processedText = ""
     rawFile = open(filename)
     rawString = rawFile.read()
+    sentenceCount = 0
+    wordCount = 0
     punctuation = [".","?",",",":",";"] # what counts as punctuation
+    minWordLength = 4 # the minimum length of a word to count
     splitString = str.split(rawString)
-    
+    for word in splitString:
+        if word[-1] in punctuation:
+            # then do stuff
+            if len(word)-1 >= minWordLength: # -1 to not count the punctuation
+                wordCount += 1
+                
+        else:
+            # then do stuff
     
     return processedText
 
