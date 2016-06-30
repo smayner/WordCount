@@ -3,7 +3,7 @@ import string
 
 # Function Definitions
 def safeInput(promptText):
-    systemCommands = ["done","batch"] # non-filename input to be accepted
+    systemCommands = ["done","batch","options"] # non-filename input to be accepted
     while True:
         try:
             inputText = input(promptText)
@@ -15,52 +15,52 @@ def safeInput(promptText):
             print("File not found or command entered incorrectly.")
             print("Please ensure the text document(s) are in the same folder as the WordCount program.")
 
-def fileProcessor(filename):
+def fileWordCount(filename):
     rawFile = open(filename)
     rawString = rawFile.read()
     sentenceCount = 0
     wordCount = 0
     punctuation = [".","?",",",":",";"] # what counts as punctuation
-    minWordLength = 4 # the minimum length of a word to count
+    minWordLength = 4 # the minimum length of a word to count; declared as a variable for consistency
     splitString = str.split(rawString)
     for word in splitString:
         if word[-1] in punctuation:
-            # then do stuff
+            sentenceCount += 1
             if len(word)-1 >= minWordLength: # -1 to not count the punctuation
                 wordCount += 1
-                
-        else:
-            # then do stuff
-    
-    return processedText
-
-def wordsPerSentence(inputText):
-    wordCount = 0
-    wordMinimum = 4 # the minimum number of letters a word has to contain to count
-    return wordCount
+            elif word[-1] == "." and word[0] in string.ascii_uppercase: # the word is less than minimum length (else) and ends in a . AND begins with a capital letter
+                sentenceCount -= 1 # the "sentence" is actually an abbreviation, so take the sentence out again
+        elif len(word) >= minWordLength:
+            wordCount += 1 # word does not end in punctuation and is long enough, so we count it
+    return wordCount / sentenceCount
 
 # Main Process
-print("Hello, welcome to WordCount!")
-print("Please ensure the text document(s) you want to read are in the same folder as the WordCount program.")
-firstInput = safeInput("Then enter the name of the text file you want to scan, or 'batch' if you want to scan multiple: ")
+def main():
+    print("Hello, welcome to WordCount!")
+    print("Please ensure the text document(s) you want to read are in the same folder as the WordCount program.")
+    firstInput = safeInput("Then enter the name of the text file you want to scan, or 'batch' if you want to scan multiple: ")
 
-averageWordcount = 0
-unprocessedText = []
+    averageWordcount = 0
+    unprocessedText = []
 
-if firstInput != "batch":
-    firstText = fileProcessor(firstInput)
-    finalResult = wordsPerSentence(firstText)
+    if firstInput != "batch":
+        finalResult = fileWordCount(firstInput)
+        print("The average words per sentence of that file was: " + str(finalResult))
 
-while firstInput == "batch":
-    finalSum = 0
-    fileCount = 0
-    currentInput = safeInput("Enter the name of the next text file you want to scan, or 'done' if you are done: ")
-    if currentInput == "done":
-        break
-    currentText = fileProcessor(currentInput)
-    fileCount += 1
-    finalResult = wordsPerSentence(currentText)
-    
-print("Yay words!")
+        finalSum = 0
+        fileCount = 0
+        while firstInput == "batch":
+            currentInput = safeInput("Enter the name of the next text file you want to scan, or 'done' if you are done: ")
+            if currentInput == "done":
+                break
+            finalSum += fileWordCount(currentInput)
+            fileCount += 1
+    finalResult = finalSum / finalCount
+
+    if firstInput == "done":
+        print "The average of the average words per sentence of those files was: " + str(finalResult))
+
+        print("Yay words!")
 
 # End of File for my sake
+main()
