@@ -3,7 +3,7 @@ import string
 
 # Function Definitions
 def safeInput(promptText):
-    systemCommands = ["done","batch","options"] # non-filename input to be accepted
+    systemCommands = ["done","batch"] # non-filename input to be accepted
     while True:
         try:
             inputText = input(promptText)
@@ -28,7 +28,7 @@ def fileWordCount(filename):
             sentenceCount += 1
             if len(word)-1 >= minWordLength: # -1 to not count the punctuation
                 wordCount += 1
-            elif word[-1] == "." and word[0] in string.ascii_uppercase: # the word is less than minimum length (else) and ends in a . AND begins with a capital letter
+            elif word[-1] == "." and word[0] in string.ascii_uppercase: # the word is less than minimum length (else) AND ends in a . AND begins with a capital letter
                 sentenceCount -= 1 # the "sentence" is actually an abbreviation, so take the sentence out again
         elif len(word) >= minWordLength:
             wordCount += 1 # word does not end in punctuation and is long enough, so we count it
@@ -40,27 +40,23 @@ def main():
     print("Please ensure the text document(s) you want to read are in the same folder as the WordCount program.")
     firstInput = safeInput("Then enter the name of the text file you want to scan, or 'batch' if you want to scan multiple: ")
 
-    averageWordcount = 0
-    unprocessedText = []
-
     if firstInput != "batch":
         finalResult = fileWordCount(firstInput)
-        print("The average words per sentence of that file was: " + str(finalResult))
+        print("The average words per sentence of that file was:",finalResult)
 
-        finalSum = 0
-        fileCount = 0
-        while firstInput == "batch":
-            currentInput = safeInput("Enter the name of the next text file you want to scan, or 'done' if you are done: ")
-            if currentInput == "done":
-                break
-            finalSum += fileWordCount(currentInput)
-            fileCount += 1
-    finalResult = finalSum / finalCount
+    finalSum = 0
+    finalCount = 0
+    while firstInput == "batch":
+        currentInput = safeInput("Enter the name of the next text file you want to scan, or 'done' if you are done: ")
+        if currentInput == "done":
+            print ("The average of the average words per sentence of those files was:",finalResult)
+            break
+        finalSum += fileWordCount(currentInput)
+        finalCount += 1
+        finalResult = finalSum / finalCount
 
-    if firstInput == "done":
-        print "The average of the average words per sentence of those files was: " + str(finalResult))
+    print("Yay words!")
 
-        print("Yay words!")
-
-# End of File for my sake
+# End of File, only main() after this line
 main()
+# :3--<
