@@ -1,3 +1,0 @@
-The average words per sentence for lorem ipsum.txt was 3.290909090909091.
-The average words per sentence for test 3wps.txt was 2.25.
-The average words per sentence for those files was 2.7704545454545455.

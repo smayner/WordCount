@@ -1,0 +1,11 @@
+1) Program crashes if user enters "done" as first input.
+2) Program displays "A division by zero has occurred" after every calculation.
+3) Program exits immediately after processing a single file, making it impossible to read output.
+
+Whitebox Concerns:
+1) Program accepts un-sanitized input after the end, potential security vulnerability.
+
+Enhancement Thoughts:
+1) Change abbreviation requirement to a fixed list
+2) Append is used unnecessarily, will fix
+3) Program does not include ! as end of sentence punctuation; requirements problem.
